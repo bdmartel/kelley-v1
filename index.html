@@ -17,9 +17,9 @@
     --bg: #FAF8F5;
     --bg-alt: #F0EDEA;
     --card-bg: #FFFFFF;
-    --text: #2C2C2C;
-    --text-light: #6B6B6B;
-    --text-lighter: #999;
+    --text: #1A1A1A;
+    --text-light: #4A4A4A;
+    --text-lighter: #777;
     --sage: #E8EDEB;
     --serif: 'Cormorant Garamond', 'Georgia', serif;
     --sans: 'Inter', -apple-system, sans-serif;
@@ -33,7 +33,7 @@
 
   body {
     font-family: var(--sans);
-    font-weight: 300;
+    font-weight: 400;
     font-size: 16px;
     line-height: 1.7;
     color: var(--text);
@@ -69,7 +69,7 @@
   .nav-brand {
     font-family: var(--serif);
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text);
     text-decoration: none;
     letter-spacing: 0.02em;
@@ -119,46 +119,49 @@
     text-align: center;
     padding: 6rem 1.5rem 4rem;
     position: relative;
+    background: linear-gradient(160deg, var(--jade) 0%, #5A8E8B 40%, #4E7D7A 100%);
+    color: #fff;
   }
 
   .hero-photo {
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
     object-fit: cover;
     object-position: center top;
     margin-bottom: 2.5rem;
-    border: 3px solid var(--sage);
-    box-shadow: 0 8px 30px rgba(107, 158, 155, 0.15);
+    border: 4px solid rgba(255,255,255,0.4);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
   }
 
   .hero h1 {
     font-family: var(--serif);
     font-size: clamp(2.2rem, 5vw, 3.5rem);
-    font-weight: 300;
+    font-weight: 500;
     letter-spacing: 0.08em;
-    color: var(--text);
+    color: #fff;
     margin-bottom: 0.8rem;
   }
 
   .hero-tagline {
     font-family: var(--serif);
     font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-    font-weight: 300;
+    font-weight: 400;
     font-style: italic;
-    color: var(--jade-dark);
+    color: rgba(255,255,255,0.85);
     margin-bottom: 1.5rem;
     letter-spacing: 0.04em;
   }
 
   .hero-roles {
     font-family: var(--sans);
-    font-size: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 500;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--text-light);
+    color: rgba(255,255,255,0.9);
   }
-  .hero-roles span { margin: 0 0.75rem; color: var(--jade-light); }
+  .hero-roles span { margin: 0 0.75rem; color: rgba(255,255,255,0.4); }
 
   .scroll-hint {
     position: absolute;
@@ -167,9 +170,9 @@
     transform: translateX(-50%);
     width: 24px;
     height: 40px;
-    border: 2px solid var(--jade-light);
+    border: 2px solid rgba(255,255,255,0.3);
     border-radius: 12px;
-    opacity: 0.4;
+    opacity: 0.6;
   }
   .scroll-hint::after {
     content: '';
@@ -179,7 +182,7 @@
     transform: translateX(-50%);
     width: 4px;
     height: 8px;
-    background: var(--jade);
+    background: rgba(255,255,255,0.6);
     border-radius: 2px;
     animation: scrollDown 1.5s ease-in-out infinite;
   }
@@ -207,7 +210,7 @@
   .section-title {
     font-family: var(--serif);
     font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-    font-weight: 400;
+    font-weight: 500;
     color: var(--text);
     margin-bottom: 2rem;
     line-height: 1.2;
@@ -408,18 +411,24 @@
   }
 
   .offering-card {
-    padding: 2rem;
+    padding: 0;
     background: var(--card-bg);
     border-radius: 8px;
     border: 1px solid var(--sage);
+    overflow: hidden;
     transition: border-color 0.2s;
   }
   .offering-card:hover { border-color: var(--jade-light); }
 
-  .offering-icon {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+  .offering-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
     display: block;
+  }
+
+  .offering-body {
+    padding: 1.5rem 2rem 2rem;
   }
 
   .offering-title {
@@ -436,22 +445,22 @@
   }
 
   .what-to-expect {
-    margin-top: 3rem;
-    padding: 2rem;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
     background: var(--sage);
-    border-radius: 8px;
+    border-radius: 6px;
   }
 
-  .what-to-expect h3 {
+  .what-to-expect h4 {
     font-family: var(--serif);
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 400;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     color: var(--jade-dark);
   }
 
   .what-to-expect p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1.8;
     color: var(--text-light);
   }
@@ -564,7 +573,7 @@
   <div class="gallery-inner">
     <p class="section-label">Gallery</p>
     <h2 class="section-title">Art</h2>
-    <p class="gallery-intro">Kelley's paintings are bold, intuitive explorations in acrylic — vibrant color fields, organic forms, and energetic movement on canvas and paper.</p>
+    <p class="gallery-intro">[Kelley has written an intro for this section in her Google Doc — to be added. Placeholder for now.]</p>
 
     <div class="filter-tabs">
       <button class="filter-tab active" onclick="filterArt('all')">All Work</button>
@@ -625,21 +634,24 @@
 
   <div class="offerings-grid">
     <div class="offering-card">
-      <span class="offering-icon" aria-hidden="true"></span>
-      <h3 class="offering-title">Spirit Connection / Mediumship</h3>
-      <p>Mediumship is the act of connecting with spirits who no longer are in body. It is something each one of us is capable of doing, yet we are not commonly made aware of this. There are a growing number of people who are opening to these skills, allowing more spirits to communicate with their loved ones.</p>
+      <img src="images/mediumship.jpg" alt="Spirit Connection / Mediumship" class="offering-img">
+      <div class="offering-body">
+        <h3 class="offering-title">Spirit Connection / Mediumship</h3>
+        <p>Mediumship is the act of connecting with spirits who no longer are in body. It is something each one of us is capable of doing, yet we are not commonly made aware of this. There are a growing number of people who are opening to these skills, allowing more spirits to communicate with their loved ones.</p>
+        <div class="what-to-expect">
+          <h4>What to Expect</h4>
+          <p>Before we even start, I will have set the intention to connect with loving energy. A session may include a visit from a loved one or several who have died, including pets, or from spirits who act as guardians to you from the spirit world.</p>
+          <p style="margin-top:0.6rem; font-style:italic; color:var(--text-lighter); font-size:0.85rem;">[Kelley is writing more details for this section]</p>
+        </div>
+      </div>
     </div>
     <div class="offering-card">
-      <span class="offering-icon" aria-hidden="true"></span>
-      <h3 class="offering-title">Intuitive Art Card Readings</h3>
-      <p>A session may include a visit from a loved one or several who have died, including pets, or from spirits who act as guardians to you from the spirit world.</p>
+      <img src="images/readings.jpg" alt="Intuitive Art Card Readings" class="offering-img">
+      <div class="offering-body">
+        <h3 class="offering-title">Intuitive Art Card Readings</h3>
+        <p>A session may include a visit from a loved one or several who have died, including pets, or from spirits who act as guardians to you from the spirit world.</p>
+      </div>
     </div>
-  </div>
-
-  <div class="what-to-expect">
-    <h3>What to Expect</h3>
-    <p>Before we even start, I will have set the intention to connect with loving energy. A session may include a visit from a loved one or several who have died, including pets, or from spirits who act as guardians to you from the spirit world.</p>
-    <p style="margin-top:0.8rem; font-style:italic; color:var(--text-lighter);">[Kelley is writing more details for this section]</p>
   </div>
 </section>
 
