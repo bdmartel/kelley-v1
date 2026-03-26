@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelley Martel — Creating Connections</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --jade: #6B9E9B;
+    --jade-dark: #4E7D7A;
+    --jade-light: #8FBFBC;
+    --amber: #C4843E;
+    --amber-light: #D4A46E;
+    --bg: #FAF8F5;
+    --bg-alt: #F0EDEA;
+    --card-bg: #FFFFFF;
+    --text: #2C2C2C;
+    --text-light: #6B6B6B;
+    --text-lighter: #999;
+    --sage: #E8EDEB;
+    --serif: 'Cormorant Garamond', 'Georgia', serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+    --max-w: 1100px;
+    --section-pad: clamp(3rem, 8vh, 6rem);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+
+  body {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(250, 248, 245, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(107, 158, 155, 0.15);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+
+  .nav-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-brand {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--jade-dark); }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    margin: 5px 0;
+    transition: 0.3s;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 1.5rem 4rem;
+    position: relative;
+  }
+
+  .hero-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    margin-bottom: 2.5rem;
+    border: 3px solid var(--sage);
+    box-shadow: 0 8px 30px rgba(107, 158, 155, 0.15);
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    margin-bottom: 0.8rem;
+  }
+
+  .hero-tagline {
+    font-family: var(--serif);
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--jade-dark);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-roles {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+  .hero-roles span { margin: 0 0.75rem; color: var(--jade-light); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 40px;
+    border: 2px solid var(--jade-light);
+    border-radius: 12px;
+    opacity: 0.4;
+  }
+  .scroll-hint::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background: var(--jade);
+    border-radius: 2px;
+    animation: scrollDown 1.5s ease-in-out infinite;
+  }
+  @keyframes scrollDown {
+    0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 0.3; transform: translateX(-50%) translateY(10px); }
+  }
+
+  /* SECTIONS */
+  section {
+    padding: var(--section-pad) 1.5rem;
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--jade);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: var(--jade-light);
+    margin: 3rem auto;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .about-text p {
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .about-text .incomplete {
+    color: var(--text-lighter);
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  .mission {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--sage);
+    border-radius: 8px;
+    border-left: 3px solid var(--jade);
+  }
+
+  .mission p {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  /* ART GALLERY */
+  .gallery-section {
+    background: var(--bg-alt);
+    margin: 0;
+    max-width: 100%;
+    padding: var(--section-pad) 1.5rem;
+  }
+  .gallery-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  .gallery-intro {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    max-width: 650px;
+  }
+
+  .filter-tabs {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .filter-tab {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--jade-light);
+    background: transparent;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 4px;
+  }
+  .filter-tab:hover { border-color: var(--jade); color: var(--jade-dark); }
+  .filter-tab.active {
+    background: var(--jade);
+    border-color: var(--jade);
+    color: #fff;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .painting-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .painting-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  }
+  .painting-card[hidden] { display: none; }
+
+  .painting-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .painting-info {
+    padding: 1.2rem 1.4rem 1.4rem;
+  }
+
+  .painting-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+
+  .painting-details {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0,0,0,0.92);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    cursor: pointer;
+  }
+  .lightbox.open { display: flex; }
+
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 0 60px rgba(0,0,0,0.5);
+  }
+
+  .lightbox-info {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: rgba(255,255,255,0.8);
+  }
+  .lightbox-info .painting-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: #fff;
+  }
+  .lightbox-info .painting-details {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.85rem;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .lightbox-close:hover { color: #fff; }
+
+  /* OFFERINGS */
+  .offerings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .offering-card {
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--sage);
+    transition: border-color 0.2s;
+  }
+  .offering-card:hover { border-color: var(--jade-light); }
+
+  .offering-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .offering-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+  }
+
+  .offering-card p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-light);
+  }
+
+  .what-to-expect {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--sage);
+    border-radius: 8px;
+  }
+
+  .what-to-expect h3 {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: var(--jade-dark);
+  }
+
+  .what-to-expect p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-light);
+  }
+
+  /* CONTACT */
+  .contact-section {
+    text-align: center;
+    padding-bottom: calc(var(--section-pad) + 2rem);
+  }
+
+  .contact-info {
+    margin-top: 2rem;
+  }
+
+  .contact-info a {
+    display: block;
+    font-size: 1.05rem;
+    color: var(--jade-dark);
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s;
+  }
+  .contact-info a:hover { color: var(--amber); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    font-size: 0.75rem;
+    color: var(--text-lighter);
+    border-top: 1px solid var(--sage);
+  }
+
+  /* MOBILE */
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: rgba(250, 248, 245, 0.98);
+      backdrop-filter: blur(12px);
+      padding: 1.5rem 2rem;
+      gap: 1.2rem;
+      border-bottom: 1px solid var(--sage);
+    }
+    .nav-toggle { display: block; }
+    .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .hero-photo { width: 160px; height: 160px; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .offerings-grid { grid-template-columns: 1fr; }
+    .filter-tabs { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-brand">Kelley Martel</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" onclick="closeNav()">About</a></li>
+      <li><a href="#art" onclick="closeNav()">Art</a></li>
+      <li><a href="#offerings" onclick="closeNav()">Offerings</a></li>
+      <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <img src="google-doc-dec2024/images/image7.jpg" alt="Kelley Martel" class="hero-photo">
+  <h1>KELLEY MARTEL</h1>
+  <p class="hero-tagline">Creating Connections</p>
+  <p class="hero-roles">SPIRIT MEDIUM <span>&middot;</span> ARTIST</p>
+  <div class="scroll-hint"></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">About</p>
+  <h2 class="section-title">Weaving Connections with the<br>Seen and Unseen</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Kelley Martel grew up in the small towns and fields and forests of New Hampshire. The timeless time she spent wandering over stone walls, and resting by beaver ponds, allowed her to weave a deep connection with the natural world, and also with all that exists beyond what meets the naked eye.</p>
+      <p>Early on, she was drawn to connecting with presences that she felt, but could not see. She was consistently delighted by how they seemed to work through, and with, the natural world. She became conscious of how a sudden flight of a hawk was directly related to the thought she had. She became aware of signs and symbols and synchronicities.</p>
+      <p>Alongside her deepening relationship with nature, she began attending the yearly dowsers convention, a gathering of people, mostly adults, who validated within her young mind the reality of connection with consciousness in all of life and in the unseen world. Also she was shown that the ways in which to communicate with all of life, are limitless.</p>
+      <p class="incomplete">[Bio continues — Kelley is writing the rest]</p>
+    </div>
+  </div>
+  <div class="mission">
+    <p>Creating Connections is an alchemical experience that begins with an inquiry and an intention. This sets in motion a conversation, with one's own spirit and whatever one considers to be the divine, or with one's spirit and spirits that exist without a body.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ART GALLERY -->
+<div class="gallery-section" id="art">
+  <div class="gallery-inner">
+    <p class="section-label">Gallery</p>
+    <h2 class="section-title">Art</h2>
+    <p class="gallery-intro">Kelley's paintings are bold, intuitive explorations in acrylic — vibrant color fields, organic forms, and energetic movement on canvas and paper.</p>
+
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterArt('all')">All Work</button>
+      <button class="filter-tab" onclick="filterArt('canvas')">Paintings on Canvas</button>
+      <button class="filter-tab" onclick="filterArt('paper')">Paintings on Paper</button>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+
+      <div class="painting-card" data-type="canvas" onclick="openLightbox(this)">
+        <img src="google-doc-dec2024/images/image1.jpg" alt="Peace When All Is Changing" class="painting-img">
+        <div class="painting-info">
+          <div class="painting-title">Peace When All Is Changing</div>
+          <div class="painting-details">Acrylic on Canvas &middot; 36" &times; 48"</div>
+        </div>
+      </div>
+
+      <div class="painting-card" data-type="canvas" onclick="openLightbox(this)">
+        <img src="google-doc-dec2024/images/image2.jpg" alt="Contemplating Birth" class="painting-img">
+        <div class="painting-info">
+          <div class="painting-title">Contemplating Birth</div>
+          <div class="painting-details">Acrylic on Canvas &middot; 36" &times; 48"</div>
+        </div>
+      </div>
+
+      <div class="painting-card" data-type="canvas" onclick="openLightbox(this)">
+        <img src="google-doc-dec2024/images/image6.jpg" alt="Heart Stream" class="painting-img">
+        <div class="painting-info">
+          <div class="painting-title">Heart Stream</div>
+          <div class="painting-details">Acrylic on Canvas &middot; 36" &times; 48"</div>
+        </div>
+      </div>
+
+      <div class="painting-card" data-type="canvas" onclick="openLightbox(this)">
+        <img src="google-doc-dec2024/images/image5.jpg" alt="Joy" class="painting-img">
+        <div class="painting-info">
+          <div class="painting-title">Joy</div>
+          <div class="painting-details">Acrylic on Canvas &middot; 48" &times; 48"</div>
+        </div>
+      </div>
+
+      <div class="painting-card" data-type="canvas" onclick="openLightbox(this)">
+        <img src="google-doc-dec2024/images/image4.jpg" alt="French Cafe" class="painting-img">
+        <div class="painting-info">
+          <div class="painting-title">French Cafe</div>
+          <div class="painting-details">Acrylic on Canvas &middot; 36" &times; 48"</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- OFFERINGS -->
+<section id="offerings">
+  <p class="section-label">Offerings</p>
+  <h2 class="section-title">Sessions &amp; Readings</h2>
+
+  <div class="offerings-grid">
+    <div class="offering-card">
+      <span class="offering-icon" aria-hidden="true"></span>
+      <h3 class="offering-title">Spirit Connection / Mediumship</h3>
+      <p>Mediumship is the act of connecting with spirits who no longer are in body. It is something each one of us is capable of doing, yet we are not commonly made aware of this. There are a growing number of people who are opening to these skills, allowing more spirits to communicate with their loved ones.</p>
+    </div>
+    <div class="offering-card">
+      <span class="offering-icon" aria-hidden="true"></span>
+      <h3 class="offering-title">Intuitive Art Card Readings</h3>
+      <p>A session may include a visit from a loved one or several who have died, including pets, or from spirits who act as guardians to you from the spirit world.</p>
+    </div>
+  </div>
+
+  <div class="what-to-expect">
+    <h3>What to Expect</h3>
+    <p>Before we even start, I will have set the intention to connect with loving energy. A session may include a visit from a loved one or several who have died, including pets, or from spirits who act as guardians to you from the spirit world.</p>
+    <p style="margin-top:0.8rem; font-style:italic; color:var(--text-lighter);">[Kelley is writing more details for this section]</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <p class="section-label">Connect</p>
+  <h2 class="section-title">Get in Touch</h2>
+  <div class="contact-info">
+    <a href="tel:+14158450317">415-845-0317</a>
+    <a href="mailto:Kelleeey@yahoo.com">Kelleeey@yahoo.com</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 Kelley Martel &middot; Creating Connections
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-info">
+    <div class="painting-title" id="lightboxTitle"></div>
+    <div class="painting-details" id="lightboxDetails"></div>
+  </div>
+</div>
+
+<script>
+  // Nav scroll shadow
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Mobile nav toggle
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('navToggle').classList.toggle('open');
+  }
+  function closeNav() {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('navToggle').classList.remove('open');
+  }
+
+  // Gallery filter
+  function filterArt(type) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('.painting-card').forEach(card => {
+      if (type === 'all' || card.dataset.type === type) {
+        card.hidden = false;
+      } else {
+        card.hidden = true;
+      }
+    });
+  }
+
+  // Lightbox
+  function openLightbox(card) {
+    const img = card.querySelector('.painting-img');
+    const title = card.querySelector('.painting-title').textContent;
+    const details = card.querySelector('.painting-details').textContent;
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightboxImg').alt = title;
+    document.getElementById('lightboxTitle').textContent = title;
+    document.getElementById('lightboxDetails').textContent = details;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+
+</body>
+</html>
