@@ -352,40 +352,6 @@
     line-height: 1.5;
   }
 
-  .inquire-btn {
-    display: inline-block;
-    margin-top: 0.8rem;
-    padding: 0.5rem 1.2rem;
-    font-family: var(--sans);
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #fff;
-    background: var(--jade);
-    border-radius: 4px;
-    transition: background 0.2s;
-  }
-  .inquire-btn:hover { background: var(--jade-dark); }
-
-  .placeholder-img {
-    width: 100%;
-    aspect-ratio: 4/3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--sage) 0%, #d0d8d6 100%);
-  }
-  .placeholder-img span {
-    font-family: var(--serif);
-    font-size: 1.1rem;
-    font-style: italic;
-    color: var(--text-lighter);
-  }
-  .painting-card.coming-soon { cursor: default; opacity: 0.7; }
-  .painting-card.coming-soon:hover { transform: none; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-
   /* LIGHTBOX */
   .lightbox {
     display: none;
@@ -627,7 +593,6 @@
         <div class="painting-info">
           <div class="painting-title">Peace When All Is Changing</div>
           <div class="painting-details">Acrylic on Canvas &middot; 36" &times; 48"</div>
-          <a class="inquire-btn" href="#" onclick="event.stopPropagation()">Inquire About Print</a>
         </div>
       </div>
 
@@ -636,7 +601,6 @@
         <div class="painting-info">
           <div class="painting-title">Contemplating Birth</div>
           <div class="painting-details">Acrylic on Canvas &middot; 36" &times; 48"</div>
-          <a class="inquire-btn" href="#" onclick="event.stopPropagation()">Inquire About Print</a>
         </div>
       </div>
 
@@ -645,7 +609,6 @@
         <div class="painting-info">
           <div class="painting-title">Heart Stream</div>
           <div class="painting-details">Acrylic on Canvas &middot; 36" &times; 48"</div>
-          <a class="inquire-btn" href="#" onclick="event.stopPropagation()">Inquire About Print</a>
         </div>
       </div>
 
@@ -654,7 +617,6 @@
         <div class="painting-info">
           <div class="painting-title">Joy</div>
           <div class="painting-details">Acrylic on Canvas &middot; 48" &times; 48"</div>
-          <a class="inquire-btn" href="#" onclick="event.stopPropagation()">Inquire About Print</a>
         </div>
       </div>
 
@@ -663,44 +625,8 @@
         <div class="painting-info">
           <div class="painting-title">French Cafe</div>
           <div class="painting-details">Acrylic on Canvas &middot; 36" &times; 48"</div>
-          <a class="inquire-btn" href="#" onclick="event.stopPropagation()">Inquire About Print</a>
         </div>
       </div>
-
-      <div class="painting-card coming-soon" data-type="canvas">
-        <div class="painting-img placeholder-img"><span>Coming Soon</span></div>
-        <div class="painting-info">
-          <div class="painting-title">New Work Coming Soon</div>
-          <div class="painting-details">Acrylic on Canvas</div>
-        </div>
-      </div>
-
-      <div class="painting-card coming-soon" data-type="paper">
-        <div class="painting-img placeholder-img"><span>Coming Soon</span></div>
-        <div class="painting-info">
-          <div class="painting-title">New Work Coming Soon</div>
-          <div class="painting-details">Mixed Media on Paper</div>
-        </div>
-      </div>
-
-      <div class="painting-card coming-soon" data-type="paper">
-        <div class="painting-img placeholder-img"><span>Coming Soon</span></div>
-        <div class="painting-info">
-          <div class="painting-title">New Work Coming Soon</div>
-          <div class="painting-details">Mixed Media on Paper</div>
-        </div>
-      </div>
-
-      <!-- TEMPLATE: Copy this block, fill in details, remove "coming-soon" class, add onclick="openLightbox(this)"
-      <div class="painting-card" data-type="canvas" onclick="openLightbox(this)">
-        <img src="images/FILENAME.jpg" alt="TITLE" class="painting-img">
-        <div class="painting-info">
-          <div class="painting-title">TITLE</div>
-          <div class="painting-details">MEDIUM &middot; SIZE</div>
-          <a class="inquire-btn" href="#" onclick="event.stopPropagation()">Inquire About Print</a>
-        </div>
-      </div>
-      -->
 
     </div>
 
@@ -813,14 +739,6 @@
   }
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeLightbox();
-  });
-
-  // Wire up inquire buttons with mailto links
-  document.querySelectorAll('.painting-card:not(.coming-soon) .inquire-btn').forEach(btn => {
-    const title = btn.closest('.painting-info').querySelector('.painting-title').textContent;
-    const subject = encodeURIComponent('Inquiry about "' + title + '"');
-    const body = encodeURIComponent('Hi Kelley,\n\nI\'m interested in a print of "' + title + '." Could you share details on available sizes and pricing?\n\nThank you!');
-    btn.href = 'mailto:Kelleeey@yahoo.com?subject=' + subject + '&body=' + body;
   });
 </script>
 
